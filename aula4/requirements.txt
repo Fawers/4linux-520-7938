@@ -1,0 +1,6 @@
+# Arquivo gerado pelo comando pip freeze
+# Nota: deixar apenas os pacotes / bibliotecas que
+# usaremos EXPLICITAMENTE.
+# Ou seja, apenas o flask, e não as suas dependências
+Flask==2.0.2
+requests==2.26.0
