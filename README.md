@@ -2,6 +2,9 @@
 conteúdo do readme
 
 ## Changelog
+2021-10-22
+* aula 4
+
 2021-10-21
 * aula 3
 
