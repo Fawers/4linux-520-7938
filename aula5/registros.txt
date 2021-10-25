@@ -1,0 +1,4 @@
+CPF	Nome	Idade	Nacionalidade
+1111111111	jose da silva	22	brasileira
+2222222222	luana nogueira	34	brasileira
+3333333333	Brian Laudrup	45	dinamarquesa

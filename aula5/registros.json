@@ -1,0 +1,22 @@
+{
+  "registros": [
+    {
+      "CPF": "1111111111",
+      "Nome": "jose da silva",
+      "Idade": "22",
+      "Nacionalidade": "brasileira"
+    },
+    {
+      "CPF": "2222222222",
+      "Nome": "luana nogueira",
+      "Idade": "34",
+      "Nacionalidade": "brasileira"
+    },
+    {
+      "CPF": "3333333333",
+      "Nome": "Brian Laudrup",
+      "Idade": "45",
+      "Nacionalidade": "dinamarquesa"
+    }
+  ]
+}
