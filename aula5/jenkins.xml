@@ -1,0 +1,44 @@
+<hudson>
+    <disabledAdministrativeMonitors />
+    <version>1.0</version>
+    <numExecutors>2</numExecutors>
+    <mode>NORMAL</mode>
+    <useSecurity>true</useSecurity>
+    <authorizationStrategy class="hudson.security.FullControlOnceLoggedInAuthorizationStrategy" />
+    <securityRealm class="hudson.security.HudsonPrivateSecurityRealm">
+        <disableSignup>true</disableSignup>
+        <enableCaptcha>false</enableCaptcha>
+    </securityRealm>
+    <disableRememberMe>false</disableRememberMe>
+    <projectNamingStrategy class="jenkins.model.ProjectNamingStrategy$DefaultProjectNamingStrategy" />
+    <workspaceDir>${ITEM_ROOTDIR}/workspace</workspaceDir>
+    <buildsDir>${ITEM_ROOTDIR}/builds</buildsDir>
+    <markupFormatter class="hudson.markup.RawHtmlMarkupFormatter">
+        <disableSyntaxHighlighting>false</disableSyntaxHighlighting>
+    </markupFormatter>
+    <jdks />
+    <viewsTabBar class="hudson.views.DefaultViewsTabBar" />
+    <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar" />
+    <clouds />
+    <slaves />
+    <scmCheckoutRetryCount>0</scmCheckoutRetryCount>
+    <views>
+        <hudson.model.AllView>
+            <owner class="hudson" reference="../../.." />
+            <name>&#12377;&#12409;&#12390;</name>
+            <filterExecutors>false</filterExecutors>
+            <filterQueue>false</filterQueue>
+            <properties class="hudson.model.View$PropertyList" />
+        </hudson.model.AllView>
+    </views>
+    <primaryView>&#12377;&#12409;&#12390;</primaryView>
+    <slaveAgentPort>0</slaveAgentPort>
+    <label />
+    <crumbIssuer class="hudson.security.csrf.DefaultCrumbIssuer">
+        <excludeClientIPFromCrumb is-xml-cool="false">true</excludeClientIPFromCrumb>
+    </crumbIssuer>
+    <nodeProperties />
+    <globalNodeProperties />
+    <MinhaTagAqui xml="&#233; um saco">Corram de Java</MinhaTagAqui>
+    <MinhaTagAqui xml="&#233; um saco">Corram de Java</MinhaTagAqui>
+</hudson>
