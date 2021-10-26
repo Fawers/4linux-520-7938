@@ -1,0 +1,28 @@
+{
+    "registros": [
+        {
+            "cpf": "12345678901",
+            "nome": "John Smith",
+            "idade": "30",
+            "endere\u00e7o": "Rua das Cobras"
+        },
+        {
+            "cpf": "10987654321",
+            "nome": "Jane Smith",
+            "idade": "27",
+            "endere\u00e7o": "AVEnida das AVEs"
+        },
+        {
+            "cpf": "45685295173",
+            "nome": "Peter Smith",
+            "idade": "5",
+            "endere\u00e7o": "Alameda dos Ala\u00fades"
+        },
+        {
+            "cpf": "65425815973",
+            "nome": "Bob",
+            "idade": "18",
+            "endere\u00e7o": "Avenida Brasil"
+        }
+    ]
+}
