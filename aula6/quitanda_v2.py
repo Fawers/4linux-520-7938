@@ -16,6 +16,33 @@ class Fruta:
         return self.__preco
 
 
+class Cliente:
+    def __init__(self):
+        self.__cesta = Cesta()
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}({self.__cesta})"
+
+    def adicionar_fruta(self, fruta):
+        self.__cesta.adicionar_fruta(fruta)
+
+    def esvaziar(self):
+        self.__cesta.esvaziar()
+
+    def calcular_total(self):
+        return self.__cesta.calcular_total()
+
+
+class ClienteFidelidade(Cliente):
+    def __init__(self, desconto=0.1):
+        super().__init__()  # chama Cliente.__init__
+        self.__multiplicador = 1 - desconto
+
+    def calcular_total(self):
+        total = super().calcular_total()  # chama Cliente.calcular_total
+        return total * self.__multiplicador
+
+
 class Cesta:
     def __init__(self):
         self.__itens = {}
@@ -59,7 +86,7 @@ quitanda = [
     Fruta("Morango", 5.00)
 ]
 
-def add_frutas(cesta):
+def add_frutas(cliente):
     menu_frutas = Menu(*quitanda, 'Sair')
 
     while True:
@@ -71,11 +98,11 @@ def add_frutas(cesta):
             break
 
         else:
-            cesta.adicionar_fruta(fruta)
+            cliente.adicionar_fruta(fruta)
 
 def main():
     menu_principal = Menu('Ver cesta', 'Adicionar frutas', 'Checkout', 'Sair')
-    cesta = Cesta()
+    cliente = ClienteFidelidade()
 
     while True:
         menu_principal.mostrar_menu()
@@ -86,14 +113,14 @@ def main():
             break
 
         elif entrada == 'Ver cesta':
-            print(cesta)
+            print(cliente)
 
         elif entrada == 'Adicionar frutas':
-            add_frutas(cesta)
+            add_frutas(cliente)
 
         elif entrada == 'Checkout':
-            print(cesta)
-            print(f"R$ {cesta.calcular_total():.2f}")
+            print(cliente)
+            print(f"R$ {cliente.calcular_total():.2f}")
 
 if __name__ == '__main__':
     main()
