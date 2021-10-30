@@ -39,7 +39,12 @@ while True:
     print("3: Checkout")
     print("4: Sair")
 
-    entrada = int(input('Digite a opção desejada: '))
+    try:
+        entrada = int(input('Digite a opção desejada: '))
+
+    except ValueError:
+        print("Digite um número válido!")
+        continue
 
     if entrada == 4:
         print("Até logo!")
