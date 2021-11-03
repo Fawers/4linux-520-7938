@@ -13,6 +13,65 @@ setores = {
     }
 }
 
+import sqlite3
+
+
+def criar_tabela(conn):
+    # CREATE TABLE setores (
+    #   nome TEXT,
+    #   andar INTEGER,
+    #   colaboradores INTEGER
+    # );
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS setores (
+            nome TEXT,
+            andar INTEGER,
+            colaboradores INTEGER
+        )
+    """)
+    conn.commit()  # COMMIT
+
+
+def inserir_dados(conn, dados):
+    dados_fmt = []
+    for (nome, andar, colab) in dados:
+        dados_fmt.append(
+            '('
+            + ', '.join([repr(nome),
+                             repr(andar),
+                             repr(colab)])
+            + ')'
+        )
+
+    query = f"""
+        INSERT INTO setores VALUES
+        {', '.join(dados_fmt)};
+    """
+    print(query)
+    conn.execute(query)
+    conn.commit()
+
+
+def mostrar_tabela(conn):
+    cursor = conn.execute("SELECT rowid, * FROM setores;")
+
+    for linha in cursor:
+        print(linha)
+
+def main():
+    conn = sqlite3.connect('db.sqlite3')
+    criar_tabela(conn)
+    inserir_dados(conn, [
+        ("tecnologia", 0, 5),
+        ("rh", 1, 5),
+        ("financeiro", 2, 20),
+    ])
+    mostrar_tabela(conn)
+
+
+if __name__ == '__main__':
+    main()
+
 # Setores
 # Nome          : TEXT
 # Andar         : INT
