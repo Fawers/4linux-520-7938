@@ -1,3 +1,5 @@
+import sys
+from time import sleep
 from datetime import datetime, timedelta
 from time import sleep
 
@@ -8,9 +10,15 @@ class Timer:
     def __init__(self, duracao):
         self.duracao = duracao
 
+    def create(self):
+        return db.criar_timer(self)
+
+    def conclude(self, id):
+        db.concluir_timer(id)
+
     def start(self):
         self.inicio = datetime.now()
-        id = db.criar_timer(self)
+        id = self.create()
         segundos = int(self.duracao.total_seconds())
 
         for s in range(1, segundos+1):
@@ -21,22 +29,27 @@ class Timer:
                 print()
 
             if s % 60 == 0:
-                print()
+                t = int(self.duracao.total_seconds() - s) // 60
+                print(f'{t}M')
 
         print()
-        db.concluir_timer(id)
+        self.conclude(id)
 
     @classmethod
     def with_duration(cls, **delta):
-        return Timer(timedelta(**delta))
+        return cls(timedelta(**delta))
 
     @classmethod
     def until_date(cls, data_fim):
         return cls(data_fim - datetime.now())
 
     @classmethod
+    def get_all(cls):
+        return db.listar_todos()
+
+    @classmethod
     def list_all(cls):
-        timers = db.listar_todos()
+        timers = cls.get_all()
 
         for (i, d, c) in timers:
             inicio = datetime.fromtimestamp(i)
