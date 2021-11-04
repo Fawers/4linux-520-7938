@@ -1,9 +1,9 @@
 import sys
 from time import sleep
 from datetime import datetime, timedelta
-from time import sleep
 
 import db
+import mongo
 
 
 class Timer:
@@ -59,5 +59,26 @@ class Timer:
             print(inicio, duracao,
                   {True: "concluido", False: "não concluido"}[concluido])
 
-Timer.with_duration(minutes=15).start()
-# Timer.list_all()
+
+class MongoTimer(Timer):
+    def create(self):
+        return mongo.criar_timer(self)
+
+    def conclude(self, id):
+        mongo.concluir_timer(id)
+
+    @classmethod
+    def get_all(cls):
+        res = []
+        timers = mongo.listar_todos()
+
+        for t in timers:
+            res.append((t['inicio'].timestamp(),
+                        t['duracao'],
+                        t['concluido']))
+
+        return res
+
+if __name__ == '__main__':
+    MongoTimer.with_duration(minutes=int(sys.argv[1])).start()
+    # MongoTimer.list_all()
