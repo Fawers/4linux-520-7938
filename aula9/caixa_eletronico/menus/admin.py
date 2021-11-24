@@ -1,4 +1,6 @@
 from .menu import Menu
+from db import usuarios
+from usuarios import Cliente
 
 def menu_admin(usuario_admin):
     menu = Menu(
@@ -33,4 +35,14 @@ def cadastrar_cliente(usuario_admin):
         print("Não foi possível cadastrar o novo usuário.")
 
 def desbloquear_cliente(usuario_admin):
-    print('desbloquear_cliente')
+    username = input("Digite o username da nova conta: ")
+    dados = usuarios.buscar(username)
+
+    if dados is None:
+        print("Conta não encontrada.")
+
+    elif usuario_admin.desbloquear_cliente(Cliente(**dados)):
+        print("Usuário desbloqueado com sucesso.")
+
+    else:
+        print(f"Ocorreu um problema ao desbloquear o usuário `{username}`.")

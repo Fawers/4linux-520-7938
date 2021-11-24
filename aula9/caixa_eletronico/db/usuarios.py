@@ -4,6 +4,10 @@ client = pymongo.MongoClient()
 db = client.caixa_eletronico
 
 
+def buscar(username):
+    return db.clientes.find_one({'username': username})
+
+
 def login(username, senha):
     busca = {'username': username, 'senha': senha}
     admin = db.admins.find_one(busca)

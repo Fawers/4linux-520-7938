@@ -6,6 +6,12 @@ class Usuario:
         self.__senha = senha
         self.__id = _id
 
+    def alterar_senha(self, nova_senha):
+        self.__senha = nova_senha
+
+    def resetar_senha(self):
+        self.alterar_senha(self.__username)
+
     def salvar(self):
         dados = {}
 
@@ -56,7 +62,7 @@ class Cliente(Usuario):
         self.__bloqueado = False
         self.__primeiro_acesso = True
         self.resetar_tentativas_erradas()
-        self.alterar_senha(self.__username)
+        self.resetar_senha()
 
     def primeiro_acesso(self):
         return self.__primeiro_acesso
@@ -67,9 +73,6 @@ class Cliente(Usuario):
 
     def resetar_tentativas_erradas(self):
         self.__tentativas_erradas = 0
-
-    def alterar_senha(self, senha):
-        self.__senha = senha
 
     def get_saldo(self):
         return self.__conta['saldo']
@@ -100,4 +103,5 @@ class Admin(Usuario):
 
     def desbloquear_cliente(self, cliente):
         cliente.desbloquear()
+        return cliente.salvar()
 
