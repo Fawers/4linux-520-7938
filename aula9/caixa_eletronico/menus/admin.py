@@ -23,7 +23,14 @@ def menu_admin(usuario_admin):
         fn(usuario_admin)
 
 def cadastrar_cliente(usuario_admin):
-    usuario_admin.cadastrar_cliente('cliente')
+    username = input("Digite o username da nova conta: ")
+    criado = usuario_admin.cadastrar_cliente(username)
+
+    if criado:
+        print(f"Usuário `{username}` criado com sucesso.")
+
+    else:
+        print("Não foi possível cadastrar o novo usuário.")
 
 def desbloquear_cliente(usuario_admin):
     print('desbloquear_cliente')

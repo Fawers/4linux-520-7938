@@ -46,8 +46,14 @@ def inserir_usuario(usuario):
 
 
 def atualizar_usuario(usuario):
-    filtro = {'username': usuario['username']}
-    return db.clientes.replace_one(filtro, usuario).acknowledged
+    if 'conta' in usuario:
+        colecao = db.clientes
+
+    else:
+        colecao = db.admins
+
+    filtro = {'_id': usuario['_id']}
+    return colecao.replace_one(filtro, usuario).acknowledged
 
 
 def criar_root():

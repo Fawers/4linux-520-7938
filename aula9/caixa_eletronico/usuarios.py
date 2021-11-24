@@ -6,6 +6,22 @@ class Usuario:
         self.__senha = senha
         self.__id = _id
 
+    def salvar(self):
+        dados = {}
+
+        for (k, v) in vars(self).items():
+            k_ = k.rpartition('__')[2]
+            if k_ != 'id':
+                dados[k_] = v
+
+        if self.__id is not None:
+            dados['_id'] = self.__id
+            return usuarios.atualizar_usuario(dados)
+
+        else:
+            self.__id = usuarios.inserir_usuario(dados)
+            return self.__id is not None
+
     @classmethod
     def login(cls, username, senha):
         dados = usuarios.login(username, senha)
@@ -80,18 +96,7 @@ class Cliente(Usuario):
 
 class Admin(Usuario):
     def cadastrar_cliente(self, username):
-        c = Cliente(username, username)
-        dados = {}
-
-        for (k, v) in vars(c).items():
-            k_ = k.replace('_Cliente__', '')\
-                  .replace('_Usuario__', '')
-            dados[k_] = v
-
-        dados.pop('id')
-        print(dados)
-        id = usuarios.inserir_usuario(dados)
-        c.__id = id
+        return Cliente(username, username).salvar()
 
     def desbloquear_cliente(self, cliente):
         cliente.desbloquear()
