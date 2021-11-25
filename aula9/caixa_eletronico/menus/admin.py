@@ -35,7 +35,7 @@ def cadastrar_cliente(usuario_admin):
         print("Não foi possível cadastrar o novo usuário.")
 
 def desbloquear_cliente(usuario_admin):
-    username = input("Digite o username da nova conta: ")
+    username = input("Digite o username da conta bloqueada: ")
     dados = usuarios.buscar(username)
 
     if dados is None:

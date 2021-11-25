@@ -1,4 +1,6 @@
 from .menu import Menu
+from usuarios import Cliente
+from db import usuarios
 
 def menu_cliente(usuario_cliente):
     menu = Menu(
@@ -25,32 +27,71 @@ def menu_cliente(usuario_cliente):
         fn = menu.get_funcao_para_entrada(entrada)
         fn(usuario_cliente)
 
+
 def consultar_saldo(usuario_cliente):
     saldo = usuario_cliente.get_saldo()
     print(f"O seu saldo é de R$ {saldo:.2f}")
 
+
+def _get_quantia(input_msg='Digite a quantia: ',
+                 err_msg='Digite uma quantia válida.'):
+    while True:
+        try:
+            return float(input(input_msg))
+
+        except ValueError:
+            print(err_msg)
+
+
 def realizar_saque(usuario_cliente):
-    quantia = float(input('Digite a quantia a sacar: '))
+    quantia = _get_quantia('Digite a quantia a sacar: ')
     novo_saldo = usuario_cliente.sacar(quantia)
 
     if novo_saldo is None:
         print("Não foi possível realizar o saque.")
 
     else:
+        usuario_cliente.salvar()
         print(f"Saque realizado. Novo saldo: R$ {novo_saldo:.2f}")
 
+
 def realizar_deposito(usuario_cliente):
-    quantia = float(input('Digite a quantia a depositar: '))
+    quantia = _get_quantia('Digite a quantia a depositar: ')
     novo_saldo = usuario_cliente.depositar(quantia)
 
     if novo_saldo is None:
         print("Não foi possível realizar o depósito.")
 
     else:
+        usuario_cliente.salvar()
         print(f"Depósito realizado. Novo saldo: R$ {novo_saldo:.2f}")
 
+
 def realizar_transferencia(usuario_cliente):
-    pass
+    quantia = _get_quantia()
+    username_destino = input('Digite o nome de usuário destinatário: ')
+    dados_dest = usuarios.buscar(username_destino)
+
+    if dados_dest is None:
+        print(f"Usuário `{username_destino}` não encontrado.")
+
+    else:
+        destinatario = Cliente(**dados_dest)
+        novos_saldos = usuario_cliente.transferir(destinatario, quantia)
+
+        if novos_saldos is None:
+            print("Não foi possível concluir a transferência.")
+            return
+
+        usuario_cliente.salvar()
+        destinatario.salvar()
+        (nsr, nsd) = novos_saldos
+
+        print("Transferência realizada.")
+        print(f"Novo saldo do remetente: R$ {nsr:.2f}")
+        print(f"Novo saldo do destinatário: R$ {nsd:.2f}")
+
+
 
 def alterar_senha(usuario_cliente):
     pass

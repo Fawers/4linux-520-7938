@@ -80,7 +80,7 @@ class Cliente(Usuario):
     def sacar(self, quantia):
         saldo = self.__conta['saldo']
 
-        if saldo < quantia:
+        if saldo < quantia or quantia < 0:
             return None
 
         novo_saldo = saldo - quantia
@@ -94,8 +94,14 @@ class Cliente(Usuario):
         self.__conta['saldo'] += quantia
         return self.__conta['saldo']
 
-    def transferir(self):
-        return self.__conta['saldo']
+    def transferir(self, destinatario, quantia):
+        novo_saldo_rem = self.sacar(quantia)
+
+        if novo_saldo_rem is None:
+            return None
+
+        novo_saldo_dest = destinatario.depositar(quantia)
+        return (novo_saldo_rem, novo_saldo_dest)
 
 class Admin(Usuario):
     def cadastrar_cliente(self, username):
