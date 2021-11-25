@@ -1,8 +1,15 @@
+from getpass import getpass
+
 from .menu import Menu
 from usuarios import Cliente
 from db import usuarios
 
-def menu_cliente(usuario_cliente):
+
+def menu_cliente(usuario_cliente: Cliente):
+    if usuario_cliente.primeiro_acesso():
+        usuario_cliente.resetar_primeiro_acesso()
+        alterar_senha(usuario_cliente)
+
     menu = Menu(
         'Área do Cliente',
         {
@@ -92,6 +99,15 @@ def realizar_transferencia(usuario_cliente):
         print(f"Novo saldo do destinatário: R$ {nsd:.2f}")
 
 
-
 def alterar_senha(usuario_cliente):
-    pass
+    while True:
+        senha_a = getpass('Digite uma nova senha: ')
+        senha_b = getpass('Digite novamente a nova senha: ')
+
+        if senha_a == senha_b:
+            break
+
+        print('As senhas não podem ser diferentes.')
+
+    usuario_cliente.alterar_senha(senha_a)
+    usuario_cliente.salvar()

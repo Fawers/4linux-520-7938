@@ -23,6 +23,7 @@ def login(username, senha):
 
     if senha == cliente['senha']:
         if not cliente['bloqueado']:
+            cliente['tentativas_erradas'] = 0
             return cliente
 
         else:

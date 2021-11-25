@@ -61,18 +61,14 @@ class Cliente(Usuario):
     def desbloquear(self):
         self.__bloqueado = False
         self.__primeiro_acesso = True
-        self.resetar_tentativas_erradas()
+        self.__tentativas_erradas = 0
         self.resetar_senha()
 
     def primeiro_acesso(self):
         return self.__primeiro_acesso
 
-    def incrementar_tentativas_erradas(self):
-        self.__tentativas_erradas += 1
-        return self.__tentativas_erradas
-
-    def resetar_tentativas_erradas(self):
-        self.__tentativas_erradas = 0
+    def resetar_primeiro_acesso(self):
+        self.__primeiro_acesso = False
 
     def get_saldo(self):
         return self.__conta['saldo']
